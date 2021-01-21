@@ -7,8 +7,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Bank2Synch {
     private final double[] accounts;
-    private Lock bankLock;
-    private Condition sufficientFunds;
+    private final Lock bankLock;
+    private final Condition sufficientFunds;
 
     public Bank2Synch(int amount, double initial) {
         accounts = new double[amount];
@@ -29,6 +29,7 @@ public class Bank2Synch {
             accounts[to] += amount;
             System.out.printf(" Sadlo calkowite %10.2f ", getTotalBalance());
             System.out.printf(" Saldo z %10.2f %n", getBalance(from));
+            sufficientFunds.signalAll(); // Wazne -> bez tego watki sie zakleszczaja (deadlock) i nie zostaja juz nigdy uruchomione
         } finally {
             bankLock.unlock();
         }
