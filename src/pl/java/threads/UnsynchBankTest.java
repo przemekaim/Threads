@@ -7,7 +7,7 @@ public class UnsynchBankTest {
     public static final int DELAY = 10;
 
     public static void main(String[] args) {
-        Bank bank = new Bank(NACCOUNTS, INITIAL_BALANCE);
+        var bank = new Bank2Synch(NACCOUNTS, INITIAL_BALANCE);
         for (int i = 0; i < NACCOUNTS; i ++) {
             int fromAccount = i;
             Runnable r = () -> {
