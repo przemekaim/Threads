@@ -1,6 +1,6 @@
 package pl.java.threads;
 
-public class Main {
+public class MainBank {
     public static final int DELAY = 10;
     public static final double MAX_AMOUNT = 1000;
     public static final int STEPS = 10;
@@ -14,10 +14,13 @@ public class Main {
                     double amount = MAX_AMOUNT * Math.random();
                     bank.transfer(0, 1, amount);
                     Thread.sleep((int) (DELAY * Math.random()));
-
+                    if (i == 5 && !Thread.currentThread().isInterrupted()) {
+                        Thread.currentThread().interrupt();
+                        break;
+                    }
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         };
 
@@ -29,20 +32,20 @@ public class Main {
                     Thread.sleep((int) (DELAY * Math.random()));
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         };
 
-       // new Thread(r1).start();
-       // new Thread(r2).start();
-       Thread t1 = new Thread(r1);
-        Thread t2 = new Thread(r2);
+
+
+        Thread t1 = new Thread(r1);
+        t1.setName("Transfer 0 -> 1");
         t1.start();
-        t2.start();
+        //new Thread(r1).start();
+        new Thread(r2).start();
 
-        while(t1.isAlive() && t2.isAlive()) {
 
-        }
-        bank.getBalance();
+
+
     }
 }
