@@ -11,14 +11,13 @@ public class Bank {
         Arrays.fill(accounts, initial);
     }
 
-
     public void transfer(int from, int to, double amount) {
-            if (accounts[from] < amount) return;
-            System.out.print(Thread.currentThread());
-            accounts[from] -= amount;
-            System.out.printf(" %10.2f z %d na %d", amount, from, to);
-            accounts[to] += amount;
-            System.out.printf(" Sadlo calkowite %10.2f%n", getTotalBalance());
+        if (accounts[from] < amount) return;
+        System.out.print(Thread.currentThread());
+        accounts[from] -= amount;
+        System.out.printf(" %10.2f z %d na %d", amount, from, to);
+        accounts[to] += amount;
+        System.out.printf(" Sadlo calkowite %10.2f%n", getTotalBalance());
 
     }
 

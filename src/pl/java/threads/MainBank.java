@@ -36,16 +36,10 @@ public class MainBank {
             }
         };
 
-
-
         Thread t1 = new Thread(r1);
         t1.setName("Transfer 0 -> 1");
         t1.start();
         //new Thread(r1).start();
         new Thread(r2).start();
-
-
-
-
     }
 }
